@@ -3,17 +3,14 @@ package Classes.Estados;
 import Classes.NextEstado;
 import Enums.TipoTokenEnum;
 
-public class Estado1 extends Estado {
+public class Estado40 extends Estado {
 
-    public Estado1(TipoTokenEnum tipoTokenEnum, Boolean ehTerminal) {
+    public Estado40(TipoTokenEnum tipoTokenEnum, Boolean ehTerminal) {
         super(tipoTokenEnum, ehTerminal);
     }
 
     @Override
     public NextEstado nextEstado(char charEntrada) {
-        if ( charEntrada == 'n') {
-            return new NextEstado(12, false, false);
-        }
         return null;
     }
 
