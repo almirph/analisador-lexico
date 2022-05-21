@@ -14,6 +14,31 @@ public class Estado1 extends Estado {
         if ( charEntrada == 'n') {
             return new NextEstado(12, false, false);
         }
+        else if ( charEntrada == 't') {
+            return new NextEstado(14, false, false);
+        }
+        else if ( charEntrada == 'f') {
+            return new NextEstado(13, false, false);
+        }
+        else if ( charEntrada >= 'a' && charEntrada <= 'z') {
+            return new NextEstado(2, false, false);
+        }
+        else if ( charEntrada >= 'A' && charEntrada <= 'Z') {
+            return new NextEstado(2, false, false);
+        }
+        else if ( charEntrada == '.') {
+            return new NextEstado(5, false, false);
+        }
+        else if ( charEntrada >= '0' && charEntrada <= '9') {
+            return new NextEstado(4, false, false);
+        }
+        else if ( charEntrada == '=') {
+            return new NextEstado(28, false, false);
+        }
+        else if ( charEntrada == '(' || charEntrada == ')' || charEntrada == '[' || charEntrada == ']' || charEntrada == ';' || charEntrada == ',' || charEntrada == '(' || charEntrada == '}') {
+            return new NextEstado(2, false, false);
+        }
+
         return null;
     }
 
