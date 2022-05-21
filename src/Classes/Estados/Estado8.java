@@ -1,11 +1,12 @@
 package Classes.Estados;
 
 import Classes.NextEstado;
+import Classes.Token;
 import Enums.TipoTokenEnum;
 
-public class Estado3 extends Estado {
+public class Estado8 extends Estado {
 
-    public Estado3(TipoTokenEnum tipoTokenEnum, Boolean ehTerminal) {
+    public Estado8(TipoTokenEnum tipoTokenEnum, Boolean ehTerminal) {
         super(tipoTokenEnum, ehTerminal);
     }
 

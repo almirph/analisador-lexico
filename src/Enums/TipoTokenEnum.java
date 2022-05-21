@@ -9,9 +9,7 @@ public enum TipoTokenEnum {
     LOGICO_LITERAL(6, "LOGICO_LITERAL"),
     NULO_LITERAL(7, "NULO_LITERAL"),
     OPERADOR(8, "OPERADOR"),
-    SEPARADOR(9, "OPERADOR"),
-    COMENTARIO(8, "OPERADOR")
-    ;
+    SEPARADOR(9, "OPERADOR");
     private final int valor;
     private final String descricao;
 

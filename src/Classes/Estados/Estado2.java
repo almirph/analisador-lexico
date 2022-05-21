@@ -1,20 +1,17 @@
 package Classes.Estados;
 
 import Classes.NextEstado;
-import Interfaces.Estado;
+import Enums.TipoTokenEnum;
 
-import java.util.HashMap;
+public class Estado2 extends Estado {
 
-public class Estado2 implements Estado {
-    private HashMap<Integer, Estado> todosEstadosList = new HashMap<Integer, Estado>();
+    public Estado2(TipoTokenEnum tipoTokenEnum, Boolean ehTerminal) {
+        super(tipoTokenEnum, ehTerminal);
+    }
 
     @Override
     public NextEstado nextEstado(char charEntrada) {
         return null;
     }
 
-    @Override
-    public void setTodosEstadosList(HashMap<Integer, Estado> todosEstadosList) {
-        this.todosEstadosList = todosEstadosList;
-    }
 }

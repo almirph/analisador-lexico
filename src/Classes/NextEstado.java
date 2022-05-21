@@ -1,9 +1,13 @@
 package Classes;
 
-import Interfaces.Estado;
-
 public class NextEstado {
-    private Estado estado;
+    private Integer estadoNumero;
     private Boolean finalizou;
     private Boolean erro;
+
+    public NextEstado(Integer estadoNumero, Boolean finalizou, Boolean erro) {
+        this.estadoNumero = estadoNumero;
+        this.finalizou = finalizou;
+        this.erro = erro;
+    }
 }
