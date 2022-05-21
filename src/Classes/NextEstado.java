@@ -10,4 +10,28 @@ public class NextEstado {
         this.finalizou = finalizou;
         this.erro = erro;
     }
+
+    public Integer getEstadoNumero() {
+        return estadoNumero;
+    }
+
+    public void setEstadoNumero(Integer estadoNumero) {
+        this.estadoNumero = estadoNumero;
+    }
+
+    public Boolean getFinalizou() {
+        return finalizou;
+    }
+
+    public void setFinalizou(Boolean finalizou) {
+        this.finalizou = finalizou;
+    }
+
+    public Boolean getErro() {
+        return erro;
+    }
+
+    public void setErro(Boolean erro) {
+        this.erro = erro;
+    }
 }
