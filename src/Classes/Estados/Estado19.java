@@ -12,7 +12,23 @@ public class Estado19 extends Estado {
 
     @Override
     public NextEstado nextEstado(char charEntrada) {
-        return null;
+        if(charEntrada == 's') {
+            return new NextEstado(22, true, false);
+        }
+        else if(charEntrada >= 'a' && charEntrada <= 'z'){
+            return new NextEstado(2, true, false);
+        }
+        else if(charEntrada >= 'A' && charEntrada <= 'Z') {
+            return new NextEstado(2, true, false);
+        }
+        else if(charEntrada >= '0' && charEntrada <= '9') {
+            return new NextEstado(2, true, false);
+        }
+        else if(charEntrada == '_') {
+            return new NextEstado(2, true, false);
+        }
+
+        return new NextEstado(null, true, false);
     }
 
 }

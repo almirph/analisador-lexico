@@ -12,7 +12,7 @@ public class Estado32 extends Estado {
 
     @Override
     public NextEstado nextEstado(char charEntrada) {
-        return null;
+        return new NextEstado(null, true, true);
     }
 
 }
