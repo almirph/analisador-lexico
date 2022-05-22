@@ -18,7 +18,7 @@ public class Analisador {
     private int entradaPosicao;
 
     private boolean nextChar() {
-        if (entradaPosicao < entrada.length()) {
+        if (entradaPosicao < entrada.length() - 1) {
             entradaPosicao++;
             return true;
         } else {
@@ -28,19 +28,20 @@ public class Analisador {
 
     private String voltaEntradaPosicao(Integer tamanhoVolta, String tokenValorAtual) {
         this.entradaPosicao = entradaPosicao - tamanhoVolta;
-
         return tokenValorAtual.substring(0, tokenValorAtual.length() - tamanhoVolta);
     }
 
     private void analisaEntrada() throws Exception {
         List<Character> charsEntrada = entrada.chars().mapToObj(e -> (char) e).collect(Collectors.toList());
         List<Estado> estadosAnteriores = new LinkedList<Estado>();
+        estadosAnteriores.add(estados.get(1));
         String tokenValorAtual = "";
         Estado estadoAnt = estados.get(1);
 
         while (nextChar()) {
             char charEntradaAtual = charsEntrada.get(entradaPosicao);
             NextEstado nextEstado = estadoAnt.nextEstado(charEntradaAtual);
+            tokenValorAtual += charEntradaAtual;
 
             if (nextEstado.getErro()) {
                 if (!estadosAnteriores.isEmpty()) {
@@ -48,19 +49,20 @@ public class Analisador {
                     if (estadoDoToken.getEstado() != null) {
                         tokenList.add(new Token(0, 0, estadoDoToken.getEstado().getToken(), tokenValorAtual));
                         String tokenValor = voltaEntradaPosicao(estadoDoToken.getPosicao(), tokenValorAtual);
-                        System.out.println(tokenValor);
+                        System.out.println(tokenValor.trim());
 
                         tokenValorAtual = "";
                         estadoAnt = estados.get(1);
+                        estadosAnteriores = new LinkedList<Estado>();
+                        estadosAnteriores.add(estados.get(1));
                     } else {
                         throw new Exception("Erro Léxico");
                     }
                 }
             }
             else {
-                estadosAnteriores.add(estadoAnt);
-                tokenValorAtual += charEntradaAtual;
                 estadoAnt = estados.get(nextEstado.getEstadoNumero());
+                estadosAnteriores.add(estadoAnt);
             }
         }
     }

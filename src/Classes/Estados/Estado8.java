@@ -12,7 +12,7 @@ public class Estado8 extends Estado {
 
     @Override
     public NextEstado nextEstado(char charEntrada) {
-        if(charEntrada != '\'') {
+        if(charEntrada == '\'') {
             return new NextEstado(9, false, false);
         }
         return new NextEstado(null, false, true);

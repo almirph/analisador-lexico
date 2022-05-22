@@ -47,6 +47,9 @@ public class Estado1 extends Estado {
         else if ( charEntrada == '\'') {
             return new NextEstado(7, false, false);
         }
+        else if ( charEntrada == '{') {
+            return new NextEstado(26, false, false);
+        }
 
         return new NextEstado(null, false, true);
     }
