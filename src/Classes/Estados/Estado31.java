@@ -13,10 +13,10 @@ public class Estado31 extends Estado {
     @Override
     public NextEstado nextEstado(char charEntrada) {
         if(charEntrada == '&') {
-            return new NextEstado(32, true, false);
+            return new NextEstado(32, false);
         }
 
-        return new NextEstado(null, false, true);
+        return new NextEstado(null, true);
     }
 
 }

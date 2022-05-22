@@ -11,7 +11,7 @@ public class Estado39 extends Estado {
 
     @Override
     public NextEstado nextEstado(char charEntrada) {
-        return new NextEstado(null, true, true);
+        return new NextEstado(null, true);
     }
 
 }

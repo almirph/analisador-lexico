@@ -12,9 +12,9 @@ public class Estado38 extends Estado {
     @Override
     public NextEstado nextEstado(char charEntrada) {
         if(charEntrada == ':') {
-            return new NextEstado(39, false, false);
+            return new NextEstado(39, false);
         }
 
-        return new NextEstado(null, false, true);
+        return new NextEstado(null,  true);
     }
 }

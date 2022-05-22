@@ -13,11 +13,11 @@ public class Estado16 extends Estado {
     @Override
     public NextEstado nextEstado(char charEntrada) {
         if (charEntrada == 'l') {
-            return new NextEstado(19, false, false);
+            return new NextEstado(19,  false);
         } else if ((charEntrada >= 'A' && charEntrada <= 'Z') || (charEntrada >= 'a' && charEntrada <= 'z') || (charEntrada >= '0' && charEntrada <= '9') || charEntrada == '_') {
-            return new NextEstado(2, false, false);
+            return new NextEstado(2,  false);
         }
-        return new NextEstado(null, false, true);
+        return new NextEstado(null,  true);
     }
 
 }
