@@ -27,8 +27,4 @@ public class EstadoAuxiliar {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-
-    public void setPosicao(Integer posicao) {
-        this.posicao = posicao;
-    }
 }

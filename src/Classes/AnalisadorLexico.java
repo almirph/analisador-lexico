@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * Vinícius de Castro Sampaio matrícula 201635002
  **/
 
-public class Analisador {
+public class AnalisadorLexico {
     /**
      * Lista de tokens
      */

@@ -1,4 +1,3 @@
-import Classes.Analisador;
 import Classes.LeitorDeArquivoHelper;
 
 /**
@@ -13,7 +12,7 @@ public class AnalisadorLexico {
 
         String entrada = LeitorDeArquivoHelper.lerFileData("semantica/errado/attrAND.lan");
 
-        Analisador analisador = new Analisador();
+        Classes.AnalisadorLexico analisador = new Classes.AnalisadorLexico();
         analisador.buildAnalisador(entrada);
         analisador.getTokenList().forEach((token -> System.out.println(token.getTipoToken().getDescricao() + " : " +  token.getValor() + " : " + token.getLinha() + " : " + token.getColuna())));
 
