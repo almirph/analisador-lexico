@@ -11,7 +11,7 @@ public class Estado3 extends Estado {
 
     @Override
     public NextEstado nextEstado(char charEntrada) {
-        if(charEntrada >= 'a' && charEntrada <= 'z' || charEntrada >= 'A' || charEntrada <= 'Z' || charEntrada >= '0' || charEntrada <= '9' || charEntrada == '_') {
+        if((charEntrada >= 'a' && charEntrada <= 'z') || (charEntrada >= 'A' && charEntrada <= 'Z') || (charEntrada >= '0' && charEntrada <= '9') || charEntrada == '_') {
             return new NextEstado(3, false, false);
         }
         return new NextEstado(null, false, true);
