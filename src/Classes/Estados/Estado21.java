@@ -25,7 +25,7 @@ public class Estado21 extends Estado {
             return new NextEstado(2, true, false);
         }
 
-        return new NextEstado(null, true, false);
+        return new NextEstado(null, true, true);
     }
 
 }

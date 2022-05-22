@@ -1,9 +1,5 @@
 import Classes.Analisador;
 import Classes.LeitorDeArquivoHelper;
-import Classes.Token;
-import Enums.TipoTokenEnum;
-
-import java.io.*;
 
 /**
  * Main class Analisador Lexico
@@ -11,7 +7,7 @@ import java.io.*;
 public class AnalisadorLexico {
     public static void main(String[] args) throws Exception {
 
-        String entrada = LeitorDeArquivoHelper.lerFileData("sintaxe/certo/attrCHAR.lan");
+        String entrada = LeitorDeArquivoHelper.lerFileData("semantica/certo/teste8.lan");
 
         Analisador analisador = new Analisador();
         analisador.buildAnalisador(entrada);
