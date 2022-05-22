@@ -1,12 +1,15 @@
 package Classes.Estados;
 
 import Classes.NextEstado;
-import Classes.Token;
+
 import Enums.TipoTokenEnum;
 
-import java.util.HashMap;
+/**
+ * Feito por Almir Philipe de Arruda matrícula 201635039
+ * Vinícius de Castro Sampaio matrícula 201635002
+ **/
 
-public class Estado {
+public abstract class Estado {
     private TipoTokenEnum tipoTokenEnum;
     private Boolean ehTerminal;
 

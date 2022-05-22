@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Feito por Almir Philipe de Arruda matrícula 201635039
+ * Vinícius de Castro Sampaio matrícula 201635002
+ **/
+
 public class LeitorDeArquivoHelper {
     private static String lerDeInputStream(InputStream inputStream) throws IOException {
         StringBuilder resultadoStringBuilder = new StringBuilder();

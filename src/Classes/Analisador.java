@@ -9,6 +9,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Feito por Almir Philipe de Arruda matrícula 201635039
+ * Vinícius de Castro Sampaio matrícula 201635002
+ **/
+
 public class Analisador {
     private List<Token> tokenList = new ArrayList<>();
     private HashMap<Integer, Estado> estados = new HashMap<Integer, Estado>();

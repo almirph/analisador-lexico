@@ -1,5 +1,9 @@
 package Enums;
 
+/**
+ * Feito por Almir Philipe de Arruda matrícula 201635039
+ * Vinícius de Castro Sampaio matrícula 201635002
+ **/
 public enum TipoTokenEnum {
     IDENTIFICADOR(1, "IDENTIFICADOR"),
     NOME_TIPO(2, "NOME_TIPO"),
