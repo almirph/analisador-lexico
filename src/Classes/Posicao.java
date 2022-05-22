@@ -1,5 +1,10 @@
 package Classes;
 
+/**
+ * Feito por Almir Philipe de Arruda matrícula 201635039
+ * Vinícius de Castro Sampaio matrícula 201635002
+ **/
+
 public class Posicao {
     public Integer getLinha() {
         return linha;

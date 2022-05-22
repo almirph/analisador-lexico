@@ -7,32 +7,22 @@ import Enums.TipoTokenEnum;
  * Vinícius de Castro Sampaio matrícula 201635002
  **/
 public class Token {
-    private int linha;
-    private int coluna;
+    private Posicao posicao;
     private TipoTokenEnum tipoToken;
     private String valor;
 
-    public Token(int linha, int coluna, TipoTokenEnum tipoToken, String valor) {
-        this.linha = linha;
-        this.coluna = coluna;
+    public Token(Posicao posicao, TipoTokenEnum tipoToken, String valor) {
+        this.posicao = posicao;
         this.tipoToken = tipoToken;
         this.valor = valor;
     }
 
     public int getLinha() {
-        return linha;
-    }
-
-    public void setLinha(int linha) {
-        this.linha = linha;
+        return posicao.getLinha();
     }
 
     public int getColuna() {
-        return coluna;
-    }
-
-    public void setColuna(int coluna) {
-        this.coluna = coluna;
+        return posicao.getColuna();
     }
 
     public TipoTokenEnum getTipoToken() {
