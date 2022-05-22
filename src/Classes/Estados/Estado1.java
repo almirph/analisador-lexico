@@ -12,7 +12,7 @@ public class Estado1 extends Estado {
     @Override
     public NextEstado nextEstado(char charEntrada) {
         if ( charEntrada == ' ' || charEntrada == '\n' || charEntrada == '\b' || charEntrada == '\t' || charEntrada == '\r') {
-            return new NextEstado(12, false, false);
+            return new NextEstado(1, false, false);
         }
         if ( charEntrada == 'n') {
             return new NextEstado(12, false, false);

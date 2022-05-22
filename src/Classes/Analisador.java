@@ -26,7 +26,7 @@ public class Analisador {
         }
     }
 
-    private String voltaEntradaPosicao(Integer tamanhoVolta, String tokenValorAtual) {
+    private String voltaEntradaPosicao(Integer tamanhoVolta, String tokenValorAtual, Boolean teveBreak) {
         this.entradaPosicao = entradaPosicao - tamanhoVolta;
         return tokenValorAtual.substring(0, tokenValorAtual.length() - tamanhoVolta);
     }
@@ -37,19 +37,29 @@ public class Analisador {
         estadosAnteriores.add(estados.get(1));
         String tokenValorAtual = "";
         Estado estadoAnt = estados.get(1);
+        Integer contadorLinha = 0;
+        Integer contadorColuna = 0;
+        Boolean teveBreak = false;
 
         while (nextChar()) {
             char charEntradaAtual = charsEntrada.get(entradaPosicao);
             NextEstado nextEstado = estadoAnt.nextEstado(charEntradaAtual);
             tokenValorAtual += charEntradaAtual;
+            contadorColuna++;
+            if (charEntradaAtual == '\n') {
+                teveBreak = true;
+            }
 
             if (nextEstado.getErro()) {
                 if (!estadosAnteriores.isEmpty()) {
                     EstadoAuxiliar estadoDoToken = verificaEstadoFinalList(estadosAnteriores);
                     if (estadoDoToken.getEstado() != null) {
-                        tokenList.add(new Token(0, 0, estadoDoToken.getEstado().getToken(), tokenValorAtual));
-                        String tokenValor = voltaEntradaPosicao(estadoDoToken.getPosicao(), tokenValorAtual);
-                        System.out.println(tokenValor.trim());
+                        String tokenValor = voltaEntradaPosicao(estadoDoToken.getPosicao(), tokenValorAtual, teveBreak);
+                        tokenList.add(new Token(contadorLinha, contadorColuna - estadoDoToken.getPosicao(), estadoDoToken.getEstado().getToken(), tokenValor.trim()));
+                        if (teveBreak) {
+                            contadorLinha++;
+                            contadorColuna = 0;
+                        }
 
                         tokenValorAtual = "";
                         estadoAnt = estados.get(1);
@@ -59,8 +69,7 @@ public class Analisador {
                         throw new Exception("Erro Léxico");
                     }
                 }
-            }
-            else {
+            } else {
                 estadoAnt = estados.get(nextEstado.getEstadoNumero());
                 estadosAnteriores.add(estadoAnt);
             }

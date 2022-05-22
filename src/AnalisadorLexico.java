@@ -15,6 +15,8 @@ public class AnalisadorLexico {
 
         Analisador analisador = new Analisador();
         analisador.buildAnalisador(entrada);
+        analisador.getTokenList().forEach((token -> System.out.println(token.getTipoToken().getDescricao() + " : " +  token.getValor() + " : " + token.getLinha() + " : " + token.getColuna())));
+
     }
 
 }
