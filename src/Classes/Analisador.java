@@ -175,7 +175,7 @@ public class Analisador {
         estados.put(35, new Estado35(TipoTokenEnum.OPERADOR, true));
         estados.put(36, new Estado36(null, false));
         estados.put(37, new Estado37(TipoTokenEnum.COMENTARIO_FINAL, true));
-        estados.put(38, new Estado38(null, false));
+        estados.put(38, new Estado38(TipoTokenEnum.SEPARADOR, true));
         estados.put(39, new Estado39(TipoTokenEnum.SEPARADOR, true));
         estados.put(40, new Estado40(null, false));
         estados.put(41, new Estado41(TipoTokenEnum.COMENTARIO_FINAL, true));

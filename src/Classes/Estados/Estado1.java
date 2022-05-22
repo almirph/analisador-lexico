@@ -50,6 +50,18 @@ public class Estado1 extends Estado {
         else if ( charEntrada == '{') {
             return new NextEstado(26, false, false);
         }
+        else if ( charEntrada == '&') {
+            return new NextEstado(31, false, false);
+        }
+        else if ( charEntrada == '!') {
+            return new NextEstado(29, false, false);
+        }
+        else if ( charEntrada == '-') {
+            return new NextEstado(35, false, false);
+        }
+        else if ( charEntrada == ':') {
+            return new NextEstado(38, false, false);
+        }
 
         return new NextEstado(null, false, true);
     }
