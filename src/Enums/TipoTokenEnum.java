@@ -15,7 +15,7 @@ public enum TipoTokenEnum {
     OPERADOR(8, "OPERADOR"),
     SEPARADOR(9, "SEPARADOR"),
     LOGICO_LITERAL_FALSE(10, "LOGICO_LITERAL_FALSE"),
-    COMENTARIO_FINAL(11, "COMENTARIO_FINAL"),
+    COMENTARIO(11, "COMENTARIO"),
 
     ;
     private final int valor;

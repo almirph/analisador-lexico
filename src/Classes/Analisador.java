@@ -16,22 +16,34 @@ import java.util.stream.Collectors;
  **/
 
 public class Analisador {
-    /** Lista de tokens */
+    /**
+     * Lista de tokens
+     */
     private List<Token> tokenList = new ArrayList<>();
 
-    /** Dicionário de estados do automato */
+    /**
+     * Dicionário de estados do automato
+     */
     private HashMap<Integer, Estado> estados = new HashMap<Integer, Estado>();
 
-    /** Input de entrada (arquivo) */
+    /**
+     * Input de entrada (arquivo)
+     */
     private String entrada;
 
-    /** Posição da leitura do arquivo */
+    /**
+     * Posição da leitura do arquivo
+     */
     private int entradaPosicao;
 
-    /** Quantidade de colunas e linhas do arquivo */
+    /**
+     * Quantidade de colunas e linhas do arquivo
+     */
     private List<Integer> MapeandoColunas = new ArrayList<Integer>();
 
-    /** Input de entrada separado em caracteres */
+    /**
+     * Input de entrada separado em caracteres
+     */
     private List<Character> charsEntrada;
 
     /**
@@ -49,17 +61,16 @@ public class Analisador {
     /**
      * Função que armazena em estrutura de dados a quantidade
      * de colunas em cada linha do arquivo
-     * */
+     */
     private void MapearColunas() {
         Integer pointerAux = 0;
         Integer countAux = 0;
 
-        while(pointerAux < charsEntrada.size()) {
+        while (pointerAux < charsEntrada.size()) {
             char caracterAux = charsEntrada.get(pointerAux);
-            if(caracterAux != '\n') {
+            if (caracterAux != '\n') {
                 countAux++;
-            }
-            else {
+            } else {
                 countAux++;
                 this.MapeandoColunas.add(countAux);
                 countAux = 0;
@@ -73,7 +84,7 @@ public class Analisador {
     /**
      * Função que realiza iteração dentro do array de caracteres
      * e realiza leitura caracter por caracter
-     * */
+     */
     private boolean nextChar() {
         if (entradaPosicao < entrada.length() - 1) {
             entradaPosicao++;
@@ -86,7 +97,7 @@ public class Analisador {
     /**
      * Função responsável por voltar o ponteiro de leitura
      * para o caracter que forma um token válido
-     * */
+     */
     private String voltaEntradaPosicao(Integer tamanhoVolta, String tokenValorAtual) {
         this.entradaPosicao = entradaPosicao - tamanhoVolta;
 
@@ -96,16 +107,16 @@ public class Analisador {
     /**
      * Função que retorna a posição (Linha, Coluna)
      * de um token a partir da posição do ponteiro
-     * */
+     */
     private Posicao getPosicao() {
         Integer countAuxLinha = 0;
         Integer countAuxColuna = 0;
         Integer seekChars = this.entradaPosicao + 1;
 
-        while(seekChars > 0) {
+        while (seekChars > 0) {
             Integer quantidadeColunasLinhaAtual = MapeandoColunas.get(countAuxLinha);
 
-            if(seekChars > quantidadeColunasLinhaAtual) {
+            if (seekChars > quantidadeColunasLinhaAtual) {
                 countAuxLinha++;
                 seekChars -= quantidadeColunasLinhaAtual;
             } else {
@@ -119,7 +130,7 @@ public class Analisador {
     /**
      * Realiza iteração da string de entrada e
      * identifica e armazena os tokens na Lista de tokens
-     * */
+     */
     private void analisaEntrada() throws ErroLexicoException {
         List<Estado> estadosAnteriores = new LinkedList<Estado>();
         estadosAnteriores.add(estados.get(1));
@@ -139,7 +150,10 @@ public class Analisador {
                         String tokenValor = voltaEntradaPosicao(estadoDoToken.getPosicao(), tokenValorAtual);
                         Posicao posicaoToken = getPosicao();
                         Token token = new Token(posicaoToken, estadoDoToken.getEstado().getToken(), tokenValor.trim());
-                        tokenList.add(token);
+
+                        if (!token.getTipoToken().equals(TipoTokenEnum.COMENTARIO)) {
+                            tokenList.add(token);
+                        }
 
                         tokenValorAtual = new String();
                         estadoAnt = estados.get(1);
@@ -160,7 +174,7 @@ public class Analisador {
     /**
      * Função responsável por verificar em uma lista de estados,
      * qual foi o último estado final e retorna-lo
-     * */
+     */
     private EstadoAuxiliar verificaEstadoFinalList(List<Estado> estadosAnteriores) {
         Estado estadoFinal = null;
         Integer index = 0;
@@ -179,14 +193,14 @@ public class Analisador {
 
     /**
      * Get da lista de tokens
-     * */
+     */
     public List<Token> getTokenList() {
         return tokenList;
     }
 
     /**
      * Instância os estados do automato do analisador
-     * */
+     */
     private void instanciaEstados() {
         estados.put(1, new Estado1(null, false));
         estados.put(2, new Estado2(TipoTokenEnum.IDENTIFICADOR, true));
@@ -224,11 +238,11 @@ public class Analisador {
         estados.put(34, new Estado34(null, false));
         estados.put(35, new Estado35(TipoTokenEnum.OPERADOR, true));
         estados.put(36, new Estado36(null, false));
-        estados.put(37, new Estado37(TipoTokenEnum.COMENTARIO_FINAL, true));
+        estados.put(37, new Estado37(TipoTokenEnum.COMENTARIO, true));
         estados.put(38, new Estado38(TipoTokenEnum.SEPARADOR, true));
         estados.put(39, new Estado39(TipoTokenEnum.SEPARADOR, true));
         estados.put(40, new Estado40(null, false));
-        estados.put(41, new Estado41(TipoTokenEnum.COMENTARIO_FINAL, true));
+        estados.put(41, new Estado41(TipoTokenEnum.COMENTARIO, true));
     }
 }
 
