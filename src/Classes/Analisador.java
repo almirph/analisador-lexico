@@ -17,10 +17,42 @@ import java.util.stream.Collectors;
 public class Analisador {
     private List<Token> tokenList = new ArrayList<>();
     private HashMap<Integer, Estado> estados = new HashMap<Integer, Estado>();
-
     private String entrada;
-
     private int entradaPosicao;
+    private List<Integer> MapeandoColunas = new ArrayList<Integer>();
+    List<Character> charsEntrada;
+
+    /**
+     * Função de build que deve receber a entrada e gera  a lista de tokens
+     **/
+    public void buildAnalisador(String entrada) throws Exception {
+        this.entrada = entrada;
+        charsEntrada = entrada.chars().mapToObj(e -> (char) e).collect(Collectors.toList());
+        this.MapearColunas();
+        this.instanciaEstados();
+        entradaPosicao = -1;
+        analisaEntrada();
+    }
+
+    private void MapearColunas() {
+        Integer pointerAux = 0;
+        Integer countAux = 0;
+
+        while(pointerAux < charsEntrada.size()) {
+            char caracterAux = charsEntrada.get(pointerAux);
+            if(caracterAux != '\n') {
+                countAux++;
+            }
+            else {
+                countAux++;
+                this.MapeandoColunas.add(countAux);
+                countAux = 0;
+            }
+            pointerAux++;
+        }
+
+        this.MapeandoColunas.add(countAux);
+    }
 
     private boolean nextChar() {
         if (entradaPosicao < entrada.length() - 1) {
@@ -31,41 +63,50 @@ public class Analisador {
         }
     }
 
-    private String voltaEntradaPosicao(Integer tamanhoVolta, String tokenValorAtual, Boolean teveBreak) {
+    private String voltaEntradaPosicao(Integer tamanhoVolta, String tokenValorAtual) {
         this.entradaPosicao = entradaPosicao - tamanhoVolta;
+
         return tokenValorAtual.substring(0, tokenValorAtual.length() - tamanhoVolta);
     }
 
+    private Posicao getPosicao() {
+        Integer countAuxLinha = 0;
+        Integer countAuxColuna = 0;
+        Integer seekChars = this.entradaPosicao + 1;
+
+        while(seekChars > 0) {
+            Integer quantidadeColunasLinhaAtual = MapeandoColunas.get(countAuxLinha);
+
+            if(seekChars > quantidadeColunasLinhaAtual) {
+                countAuxLinha++;
+                seekChars -= quantidadeColunasLinhaAtual;
+            } else {
+                countAuxColuna = seekChars;
+                seekChars = 0;
+            }
+        }
+        return new Posicao(countAuxLinha, countAuxColuna);
+    }
+
     private void analisaEntrada() throws Exception {
-        List<Character> charsEntrada = entrada.chars().mapToObj(e -> (char) e).collect(Collectors.toList());
         List<Estado> estadosAnteriores = new LinkedList<Estado>();
         estadosAnteriores.add(estados.get(1));
         String tokenValorAtual = "";
         Estado estadoAnt = estados.get(1);
-        Integer contadorLinha = 0;
-        Integer contadorColuna = 0;
-        Boolean teveBreak = false;
 
         while (nextChar()) {
             char charEntradaAtual = charsEntrada.get(entradaPosicao);
+
             NextEstado nextEstado = estadoAnt.nextEstado(charEntradaAtual);
             tokenValorAtual += charEntradaAtual;
-            contadorColuna++;
-            if (charEntradaAtual == '\n') {
-                teveBreak = true;
-            }
 
             if (nextEstado.getErro()) {
                 if (!estadosAnteriores.isEmpty()) {
                     EstadoAuxiliar estadoDoToken = verificaEstadoFinalList(estadosAnteriores);
                     if (estadoDoToken.getEstado() != null) {
-                        String tokenValor = voltaEntradaPosicao(estadoDoToken.getPosicao(), tokenValorAtual, teveBreak);
-                        tokenList.add(new Token(contadorLinha, contadorColuna - estadoDoToken.getPosicao(), estadoDoToken.getEstado().getToken(), tokenValor.trim()));
-                        if (teveBreak) {
-                            contadorLinha++;
-                            contadorColuna = 0;
-                        }
-
+                        String tokenValor = voltaEntradaPosicao(estadoDoToken.getPosicao(), tokenValorAtual);
+                        Posicao posicaoToken = getPosicao();
+                        tokenList.add(new Token(posicaoToken.getLinha(), posicaoToken.getColuna() - estadoDoToken.getPosicao(), estadoDoToken.getEstado().getToken(), tokenValor.trim()));
                         tokenValorAtual = "";
                         estadoAnt = estados.get(1);
                         estadosAnteriores = new LinkedList<Estado>();
@@ -99,16 +140,6 @@ public class Analisador {
 
     public List<Token> getTokenList() {
         return tokenList;
-    }
-
-    /**
-     * Função de build que deve receber a entrada e gera  a lista de tokens
-     **/
-    public void buildAnalisador(String entrada) throws Exception {
-        this.instanciaEstados();
-        this.entrada = entrada;
-        entradaPosicao = -1;
-        analisaEntrada();
     }
 
     private void instanciaEstados() {
